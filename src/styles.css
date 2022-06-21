@@ -1,0 +1,26 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+html[data-theme='dark'] {
+  --background-color: #000000;
+  --color: #ffffff;
+
+  --logo-color: #4C4C4C;
+  --arrow-select-color: #555555;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --input-range-color: #ffffff;
+}
+
+html[data-theme='light'] {
+  --background-color: #ffffff;
+  --color: #000000;
+
+  --logo-color: #4C4C4C;
+  --arrow-select-color: #b3b3b3;
+  --border-color: rgba(0, 0, 0, 0.3);
+  --input-range-color: #EFEFEF;
+}

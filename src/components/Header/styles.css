@@ -1,0 +1,18 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo * {
+  stroke: var(--logo-color)
+}
+
+.logo {
+  margin: 35px 0;
+}
+
+@media (max-width: 767px) {
+  .logo {
+    margin: 25px 0;
+  }
+}
