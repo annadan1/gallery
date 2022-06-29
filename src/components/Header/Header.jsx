@@ -3,7 +3,7 @@ import ThemeSwitcher from '../Buttons/index.js';
 import Logo from '../../images/Logo.svg';
 
 const Header = () => (
-  <div className="head">
+  <div className="Head">
     <Logo className="logo" />
     <ThemeSwitcher />
   </div>

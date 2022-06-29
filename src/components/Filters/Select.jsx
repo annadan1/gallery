@@ -12,8 +12,7 @@ const Select = ({
   const ref = useRef(null);
   const toggleOpen = (e) => {
     if (
-      e.target.className === 'RemoveFilter'
-      || e.target.parentNode.className === 'RemoveFilter'
+      e.target.className === 'ButtonForRemoveFilter'
     ) {
       return;
     }
@@ -31,9 +30,9 @@ const Select = ({
     >
       <span className="SelectTitle">{title || defaultTitle}</span>
       {title && (
-        <div className="RemoveFilter">
-          <RemoveFilter onClick={() => onChange('')} />
-        </div>
+        <button className="ButtonForRemoveFilter" type="button" onClick={() => onChange('')}>
+          <RemoveFilter className="RemoveFilter" />
+        </button>
       )}
       <div className={cn(isOpen ? 'SelectArrowClose' : 'SelectArrowOpen')}>
         <SelectArrow />

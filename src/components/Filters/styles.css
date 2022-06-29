@@ -1,6 +1,8 @@
 .Filter {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 40px;
+  grid-column-gap: 20px;
 }
 
 .Input {
@@ -60,11 +62,15 @@
 }
 
 .RemoveFilter {
+  fill: var(--remove-icon-color);
+  pointer-events: none;
+}
+
+.ButtonForRemoveFilter{
   position: absolute;
-  display: flex;
-  right: 35px;
+  right: 25px;
   float: right;
-  fill: var(--arrow-select-color);
+  border: none;
 }
 
 .SelectArrowOpen {
@@ -73,6 +79,7 @@
   right: 15px;
   float: right;
   fill: var(--arrow-select-color);
+  opacity: 30%;
 }
 
 .SelectArrowClose{
@@ -81,6 +88,7 @@
   right: 15px;
   float: right;
   fill: var(--arrow-select-color);
+  opacity: 30%;
   transform: rotate(180deg);
 }
 
@@ -200,6 +208,11 @@
   display: none;
 }
 
+.LineRange {
+  padding: 0 10px;
+  stroke: var(--color)
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; 
@@ -210,11 +223,6 @@ input[type="number"]:hover,
 input[type="number"]:focus {
     appearance: none;
     -moz-appearance: textfield;
-}
-
-.LineRange {
-  padding: 0 10px;
-  stroke: var(--color)
 }
 
 [data-simplebar] {

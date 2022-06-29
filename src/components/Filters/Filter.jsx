@@ -8,10 +8,11 @@ import {
 import Input from './Input.jsx';
 import Select from './Select.jsx';
 import Range from './Range.jsx';
+import { actions as actionsPaintings } from '../../slices/paintingsSlice';
 import { actions as actionsLocations } from '../../slices/locationsSlice';
 import { actions as actionsAuthors } from '../../slices/authorsSlice';
 
-const Filter = () => {
+const Filter = ({ setCurrentPage }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,13 +35,18 @@ const Filter = () => {
 
   return (
     <div className="Filter">
-      <Input />
+      <Input onChange={(e) => {
+        dispatch(actionsPaintings.setSelectedNamePainting(e.target.value));
+        setCurrentPage(1);
+      }}
+      />
       <Select
         options={authors}
         title={currentAuthor?.name}
         defaultTitle="Author"
         onChange={(value) => {
           dispatch(actionsAuthors.setSelectedAuthor(value));
+          setCurrentPage(1);
         }}
       />
       <Select
@@ -49,6 +55,7 @@ const Filter = () => {
         defaultTitle="Location"
         onChange={(value) => {
           dispatch(actionsLocations.setSelectedLocation(value));
+          setCurrentPage(1);
         }}
       />
       <Range />

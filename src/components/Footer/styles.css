@@ -1,0 +1,54 @@
+.Footer {
+  display: block;
+  height: 100%;
+  padding: 0 0 60px 0;
+}
+
+.PaginationContainer {
+  display: flex;
+  padding: 40px 0;
+}
+
+button {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--background-color);
+  cursor: pointer;
+  border: 1px solid var(--color);
+}
+
+.Arrow {
+  fill: var(--arrow-select-color);
+}
+
+.Arrow:hover:enabled {
+  background-color: var(--pagination-hover);
+}
+
+.Arrow:disabled {
+  opacity: 30%;
+}
+
+.Left {
+  border-radius: 8px 0 0 8px;
+}
+
+.Right {
+  border-radius: 0 8px 8px 0;
+}
+
+.Pagination {
+  background-color: var(--pagination-background-color);
+  color: var(--pagination-color);
+}
+
+.Pagination:hover:enabled {
+  background-color: var(--pagination-hover);
+}
+
+.SelectPagination {
+  background-color: var(--pagination-color);
+  color: var(--pagination-background-color);
+}

@@ -1,18 +1,16 @@
-.head {
+.Head {
   display: flex;
   justify-content: space-between;
-}
-
-.logo * {
-  stroke: var(--logo-color)
-}
-
-.logo {
+  align-items: center;
   margin: 35px 0;
 }
 
+.logo {
+  stroke: var(--logo-color);
+}
+
 @media (max-width: 767px) {
-  .logo {
+  .Head {
     margin: 25px 0;
   }
 }

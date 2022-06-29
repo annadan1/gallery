@@ -1,11 +1,12 @@
 body {
   font-family: 'Roboto';
-  position: fixed;
   top: 0;
   left: 0;
   background-color: var(--background-color);
   color: var(--color);
+  overflow-x: hidden;
 }
+
 #container{
   max-width: 1120px; 
   margin-left: auto;
