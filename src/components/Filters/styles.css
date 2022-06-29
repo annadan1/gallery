@@ -5,9 +5,13 @@
   grid-column-gap: 20px;
 }
 
-.Input {
+.SelectSize {
   width: 265px;
   height: 45px;
+  font-size: 13px;
+}
+
+.Input {
   border: 1px solid var(--color);
   border-radius: 8px;
   outline: none;
@@ -15,8 +19,11 @@
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  background: transparent;
+  background: var(--filter-background-color);
   color: var(--color);
+}
+.Input::placeholder {
+  font-size: 13px;
 }
 
 .Select {
@@ -25,13 +32,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 265px;
-  height: 46px;
   border-radius: 8px;
   border: 1px solid var(--color);
   color: var(--color);
   box-sizing: border-box;
-  background: var(--background-color);
+  background: var(--filter-background-color);
   cursor: pointer;
 }
 
@@ -43,22 +48,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 265px;
-  height: 46px;
   border-radius: 8px 8px 0 0;
   color: var(--color);
   box-sizing: border-box;
-  background: var(--background-color);
+  background: var(--filter-background-color);
   cursor: pointer;
 }
 
 .SelectTitle {
-  width: 220px;
+  width: 190px;
   word-break: break-all;
   margin: 0 0 0 15px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .RemoveFilter {
@@ -68,9 +71,12 @@
 
 .ButtonForRemoveFilter{
   position: absolute;
-  right: 25px;
+  height: auto;
+  width: auto;
+  right: 35px;
   float: right;
   border: none;
+  background-color: var(--filter-background-color);
 }
 
 .SelectArrowOpen {
@@ -103,7 +109,7 @@
   padding: 0;
   margin: 0;  
   list-style: none;
-  background: var(--background-color); 
+  background: var(--filter-background-color); 
   border-radius: 0 0 8px 8px;
   max-height: 300px;
   z-index: 1;
@@ -146,13 +152,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 265px;
-  height: 46px;
   border-radius: 8px;
   border: 1px solid var(--color, 0.3);
   color: var(--color);
   box-sizing: border-box;
-  background: var(--background-color);
+  background: var(--filter-background-color);
   cursor: pointer;
 }
 
@@ -164,8 +168,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 265px;
-  height: 46px;
   border-radius: 8px 8px 0 0;
   color: var(--color);
   box-sizing: border-box;
@@ -223,6 +225,43 @@ input[type="number"]:hover,
 input[type="number"]:focus {
     appearance: none;
     -moz-appearance: textfield;
+}
+
+@media (max-width: 1365px) {
+  .Filter {
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 40px;
+    grid-column-gap: 20px;
+  }
+  .SelectSize {
+    width: 220px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .Filter {
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 40px;
+    grid-column-gap: 20px;
+  }
+  .SelectSize {
+    width: 160px;
+  }
+}
+
+@media (max-width: 767px) {
+  .Filter {
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 45px;
+    grid-row-gap: 15px;
+  }
+  .SelectSize {
+    width: 280px;
+    font-size: 14px;
+  }
+  .Input::placeholder {
+    font-size: 14px;
+  }
 }
 
 [data-simplebar] {

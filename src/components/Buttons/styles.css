@@ -1,4 +1,14 @@
 .button-theme {
   background: transparent;
   border: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  display:flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.theme-icon {
+  vertical-align: top;
 }

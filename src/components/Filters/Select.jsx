@@ -24,7 +24,7 @@ const Select = ({
   return (
     <div
       ref={isOpen ? ref : null}
-      className={cn(isOpen ? 'SelectOpen' : 'Select')}
+      className={cn(isOpen ? 'SelectOpen SelectSize' : 'Select SelectSize')}
       onClick={toggleOpen}
       aria-hidden="true"
     >

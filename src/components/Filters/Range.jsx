@@ -23,7 +23,7 @@ const Range = () => {
   return (
     <div
       ref={isOpen ? ref : null}
-      className={cn(isOpen ? 'RangeOpen' : 'Range')}
+      className={cn(isOpen ? 'RangeOpen SelectSize' : 'Range SelectSize')}
       aria-hidden="true"
       onClick={toggleOpen}
     >

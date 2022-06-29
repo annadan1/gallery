@@ -9,6 +9,8 @@ import Footer from '../Footer/index.js';
 const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  console.log(window.location);
+
   return (
     <Provider store={store}>
       <div id="container">

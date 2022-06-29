@@ -14,6 +14,7 @@ html[data-theme='dark'] {
   --remove-icon-color: #555555; 
   --border-color: rgba(255, 255, 255, 0.3);
   --input-range-color: #ffffff;
+  --filter-background-color: #0C0C0C;
   --pagination-background-color: #000000;
   --pagination-color: #ffffff;
   --pagination-hover: #464646;
@@ -28,6 +29,7 @@ html[data-theme='light'] {
   --remove-icon-color: #555555; 
   --border-color: rgba(0, 0, 0, 0.3);
   --input-range-color: #EFEFEF;
+  --filter-background-color: #FFFFFF;
   --pagination-background-color: #ffffff;
   --pagination-color: #000000;
   --pagination-hover: #EDEDED;
