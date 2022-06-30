@@ -52,3 +52,22 @@ button {
   background-color: var(--pagination-color);
   color: var(--pagination-background-color);
 }
+
+@media (max-width: 1023px) {
+  .PaginationContainer {
+    padding: 35px 0;
+  }
+  .Footer {
+    padding: 0 0 20px 0 
+  }
+}
+
+@media (max-width: 767px) {
+  .PaginationContainer {
+    padding: 30px 0 0 0;
+  }
+  .Footer {
+    padding: 0 0 30px 0  
+  }
+}
+

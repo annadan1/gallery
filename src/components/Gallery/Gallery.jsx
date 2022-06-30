@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import routes from '../../routes/routes';
 import usePaintingsFilter from '../../hooks/usePaintingsFilter.js';
 import AboutPainting from './AboutPainting.jsx';
@@ -16,11 +16,9 @@ const getFilteredPaintings = (paintings, filters, currentPage) => {
   return filterPaintings.find(({ page }) => page === currentPage);
 };
 
-const Gallery = ({ currentPage }) => {
-  const paintings = useSelector((state) => state.paintings.paintings);
-  const filters = useSelector((state) => state.paintings.filters);
-  const authors = useSelector((state) => state.authors.authors);
-  const locations = useSelector((state) => state.locations.locations);
+const Gallery = ({
+  currentPage, paintings, filters, authors, locations,
+}) => {
   const currentPaintings = getFilteredPaintings(paintings, filters, currentPage);
 
   const getAuthorName = (authorId) => {
@@ -36,7 +34,11 @@ const Gallery = ({ currentPage }) => {
     <div className="Gallery">
       {currentPaintings?.paintings.map((painting) => (
         <div key={painting.id} className="PaintingContainer">
-          <img src={routes.imagePath(painting.imageUrl)} alt={painting.name} loading="lazy" />
+          <img
+            src={routes.imagePath(painting.imageUrl)}
+            alt={painting.name}
+            loading="lazy"
+          />
           <AboutPainting
             painting={painting}
             getAuthorName={getAuthorName}

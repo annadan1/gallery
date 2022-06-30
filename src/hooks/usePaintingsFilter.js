@@ -1,12 +1,20 @@
 const sliceIntoChunks = (arr, size = 12) => {
   let page = 1;
-  const result = [];
-  for (let i = 0; i < arr.length; i += size) {
-    const chank = arr.slice(i, i + size);
-    result.push({ page, paintings: chank });
-    page += 1;
-  }
-  return result;
+  let chank = [];
+  return arr.reduce((res, item, index) => {
+    if (index === (arr.length - 1)) {
+      res.push({ page, paintings: chank });
+    }
+    if (chank.length < size) {
+      chank.push(item);
+    } else {
+      res.push({ page, paintings: chank });
+      page += 1;
+      chank = [];
+      chank.push(item);
+    }
+    return res;
+  }, []);
 };
 
 const usePaintingsFilter = (paintings, filters) => {
