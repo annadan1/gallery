@@ -1,26 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import routes from '../../routes/routes';
-
-const PreloadImages = ({ imageUrl }) => {
-  const img = new Image();
-  img.src = routes.imagePath(imageUrl);
-  return img;
-};
+import BlurEffect from '../../images/BlurEffect.png';
 
 const ImageComponent = ({ painting }) => {
-  useEffect(() => {
-    PreloadImages(painting);
-  });
-
   const { imageUrl, name } = painting;
+  const [currentSrc, setCurrentSrc] = useState({ src: BlurEffect, loading: true });
+
+  useEffect(() => {
+    const src = routes.imagePath(imageUrl);
+    const img = new Image();
+    img.src = src;
+    img.onload = () => setCurrentSrc({ src, loading: false });
+  });
 
   return (
     <img
-      src={routes.imagePath(imageUrl)}
+      src={currentSrc.src}
       alt={name}
       style={{
-        maxHeight: 275,
-        maxWidht: 360,
+        opacity: currentSrc.loading ? 0.5 : 1,
+        transition: 'opacity .15s linear',
       }}
     />
   );

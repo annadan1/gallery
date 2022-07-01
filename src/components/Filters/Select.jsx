@@ -11,9 +11,7 @@ const Select = ({
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
   const toggleOpen = (e) => {
-    if (
-      e.target.className === 'ButtonForRemoveFilter'
-    ) {
+    if (e.target.className === 'ButtonForRemoveFilter') {
       return;
     }
     setIsOpen(!isOpen);
@@ -30,7 +28,11 @@ const Select = ({
     >
       <span className="SelectTitle">{title || defaultTitle}</span>
       {title && (
-        <button className="ButtonForRemoveFilter" type="button" onClick={() => onChange('')}>
+        <button
+          className="ButtonForRemoveFilter"
+          type="button"
+          onClick={() => onChange('')}
+        >
           <RemoveFilter className="RemoveFilter" />
         </button>
       )}
