@@ -21,13 +21,14 @@
     "react-scripts": "5.0.1",
     "simplebar-react": "^2.4.1",
     "web-vitals": "^2.1.4",
-    "webpack": "^5.73.0"
+    "webpack": "^5.73.0",
+    "webpack-merge": "^5.8.0"
   },
   "scripts": {
     "test": "jest",
     "prebuild": "rm -rf dist",
-    "build": "webpack",
-    "start": "npx webpack serve"
+    "build": "webpack --config webpack.prod.js",
+    "start": "npx webpack serve --open --config webpack.dev.js"
   },
   "browserslist": {
     "production": [
