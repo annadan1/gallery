@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchAuthors,
-  fetchPaintings,
-  fetchLocations,
-} from '../../slices/index.js';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Input from './Input.jsx';
 import Select from './Select.jsx';
 import Range from './Range.jsx';
@@ -12,16 +7,8 @@ import { actions as actionsPaintings } from '../../slices/paintingsSlice';
 import { actions as actionsLocations } from '../../slices/locationsSlice';
 import { actions as actionsAuthors } from '../../slices/authorsSlice';
 
-const Filter = ({ setCurrentPage }) => {
+const Filter = ({ setCurrentPage, authors, locations }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPaintings());
-    dispatch(fetchAuthors());
-    dispatch(fetchLocations());
-  }, [dispatch]);
-
-  const locations = useSelector((state) => state.locations.locations);
   const currentLocation = useSelector(
     (state) => state.locations.selectedLocation,
   );
@@ -29,8 +16,6 @@ const Filter = ({ setCurrentPage }) => {
     id,
     name: location,
   }));
-
-  const authors = useSelector((state) => state.authors.authors);
   const currentAuthor = useSelector((state) => state.authors.selectedAuthor);
 
   return (

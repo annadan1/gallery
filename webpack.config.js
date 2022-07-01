@@ -18,7 +18,6 @@ module.exports = {
       directory: path.join(path.resolve(), 'dist'),
     },
     open: true,
-    compress: true,
     port: 5000,
   },
   plugins: [
