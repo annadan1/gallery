@@ -1,8 +1,10 @@
 import React, { useEffect, Suspense } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import usePaintingsFilter from '../../hooks/usePaintingsFilter.js';
 import AboutPainting from './AboutPainting.jsx';
-import { actions } from '../../slices/paintingsSlice';
+import { actions as actionsPainting } from '../../slices/paintingsSlice';
+import { actions as actionsPage } from '../../slices/pageSlice';
 import Image from './Image.jsx';
 
 const getFilteredPaintings = (paintings, filters, currentPage) => {
@@ -10,7 +12,7 @@ const getFilteredPaintings = (paintings, filters, currentPage) => {
   const filterPaintings = usePaintingsFilter(paintings, filters);
 
   useEffect(() => {
-    dispatch(actions.setFilterPaintings(filterPaintings));
+    dispatch(actionsPainting.setFilterPaintings(filterPaintings));
   });
 
   return filterPaintings.find(({ page }) => page === currentPage);
@@ -19,7 +21,20 @@ const getFilteredPaintings = (paintings, filters, currentPage) => {
 const Gallery = ({
   currentPage, paintings, filters, authors, locations,
 }) => {
-  const currentPaintings = getFilteredPaintings(paintings, filters, currentPage);
+  const currentPaintings = getFilteredPaintings(
+    paintings,
+    filters,
+    currentPage,
+  );
+  const dispatch = useDispatch();
+  const touchPaintingId = useSelector((state) => state.page.touchPaintingId);
+  const handleTouchToogle = ({ id }) => {
+    if (id === touchPaintingId) {
+      dispatch(actionsPage.setTouchPaintingId(null));
+    } else {
+      dispatch(actionsPage.setTouchPaintingId(id));
+    }
+  };
 
   const getAuthorName = (authorId) => {
     const author = authors.find(({ id }) => id === authorId);
@@ -32,8 +47,15 @@ const Gallery = ({
 
   return (
     <div className="Gallery">
-      { currentPaintings?.paintings.map((painting) => (
-        <div key={painting.id} className="PaintingContainer">
+      {currentPaintings?.paintings.map((painting) => (
+        <div
+          key={painting.id}
+          id={painting.id}
+          className={cn(
+            touchPaintingId === painting.id ? 'PaintingContainer Touch' : 'PaintingContainer',
+          )}
+          onTouchStart={() => handleTouchToogle(painting)}
+        >
           <Suspense>
             <Image painting={painting} />
           </Suspense>

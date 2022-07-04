@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../Header/index.js';
 import Filter from '../Filters/index.js';
@@ -8,6 +8,7 @@ import {
   fetchPaintings,
   fetchLocations,
 } from '../../slices/index.js';
+import { actions } from '../../slices/pageSlice.js';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,15 @@ const App = () => {
     dispatch(fetchLocations());
   }, [dispatch]);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector((state) => state.page.page);
   const paintings = useSelector((state) => state.paintings.paintings);
   const filters = useSelector((state) => state.paintings.filters);
   const authors = useSelector((state) => state.authors.authors);
   const locations = useSelector((state) => state.locations.locations);
+
+  const setCurrentPage = (newPage) => {
+    dispatch(actions.setPage(newPage));
+  };
 
   const ComponentGallery = React.lazy(() => import('../Gallery/index.js'));
 

@@ -45,15 +45,6 @@
   padding-bottom: 5px;
 }
 
-.PaintingContainer:hover .AboutPainting {
-  transition: 1s;
-  height: 145px;
-}
-
-.PaintingContainer:hover .AboutPainting > .PaintingName {
-  white-space: normal;
-}
-
 .TitleAbout {
   font-size: 13px;
   font-weight: bold;
@@ -82,6 +73,13 @@
     width: 340px;
     height: 249px;
   }
+  .Touch > .AboutPainting{
+    transition: 1s;
+    height: 140px;
+  }
+  .Touch > .AboutPainting > .PaintingName{
+    white-space: normal;
+  }
 }
 
 @media (max-width: 767px) {
@@ -91,5 +89,23 @@
   .PaintingContainer {
     width: 280px;
     height: 205px;
+  }
+  .Touch > .AboutPainting{
+    transition: 1s;
+    height: 120px;
+  }
+  .Touch > .AboutPainting > .PaintingName{
+    white-space: normal;
+  }
+}
+
+@media (any-hover: hover) {
+  .PaintingContainer:hover .AboutPainting {
+    transition: 1s;
+    height: 145px;
+  }
+  
+  .PaintingContainer:hover .AboutPainting > .PaintingName {
+    white-space: normal;
   }
 }

@@ -247,6 +247,12 @@ input[type="number"]:focus {
   .SelectSize {
     width: 160px;
   }
+  .SelectTitle {
+    width: 90px;
+  }
+  .ButtonForRemoveFilter{
+    right: 30px;
+  }
 }
 
 @media (max-width: 767px) {
