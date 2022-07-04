@@ -236,6 +236,9 @@ input[type="number"]:focus {
   .SelectSize {
     width: 220px;
   }
+  .SelectTitle {
+    width: 150px;
+  }
 }
 
 @media (max-width: 1023px) {
