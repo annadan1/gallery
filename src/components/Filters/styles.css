@@ -239,6 +239,17 @@ input[type="number"]:focus {
   .SelectTitle {
     width: 150px;
   }
+  .RangeContainer {
+    max-height: 160px;
+  }
+  .RangeOption {
+    width: 110px;
+  }
+  .LineRange {
+    display: block;
+    padding: 15px 0;
+    margin: auto;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -256,6 +267,17 @@ input[type="number"]:focus {
   .ButtonForRemoveFilter{
     right: 30px;
   }
+  .RangeContainer {
+    max-height: 160px;
+  }
+  .RangeOption {
+    width: 110px;
+  }
+  .LineRange {
+    display: block;
+    padding: 15px 0;
+    margin: auto;
+  }
 }
 
 @media (max-width: 767px) {
@@ -268,8 +290,24 @@ input[type="number"]:focus {
     width: 280px;
     font-size: 14px;
   }
+  .SelectTitle {
+    width: 210px;
+  }
   .Input::placeholder {
     font-size: 14px;
+  }
+  .RangeContainer {
+    max-height: 160px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .RangeOption {
+    width: 110px;
+  }
+  .LineRange {
+    display: block;
+    padding: 15px 0;
+    margin: auto;
   }
 }
 
