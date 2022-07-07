@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import _ from 'lodash';
 
 const useSearchParamsQuery = () => {
   const { filters } = useSelector((state) => state.page);
@@ -27,7 +28,7 @@ const useSearchParamsQuery = () => {
 
     if (typeof value === 'object') { (currentQuery[name] = JSON.stringify(value)); } else { (currentQuery[name] = value); }
     if (!value) {
-      delete currentQuery[name];
+      _.omit(currentQuery, name);
     }
 
     setSearchParams(currentQuery);

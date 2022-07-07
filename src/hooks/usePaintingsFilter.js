@@ -4,6 +4,7 @@ const sliceIntoChunks = (arr, size = 12) => {
   return arr.reduce((res, item, index) => {
     if (index === (arr.length - 1)) {
       res.push({ page, paintings: chank });
+      return res;
     }
     if (chank.length < size) {
       chank.push(item);
