@@ -25,12 +25,12 @@ const useSearchParamsQuery = () => {
         }
       }
     });
-
-    if (typeof value === 'object') { (currentQuery[name] = JSON.stringify(value)); } else { (currentQuery[name] = value); }
     if (!value) {
-      _.omit(currentQuery, name);
+      setSearchParams(_.omit(currentQuery, name));
+      return;
     }
 
+    if (typeof value === 'object') { (currentQuery[name] = JSON.stringify(value)); } else { (currentQuery[name] = value); }
     setSearchParams(currentQuery);
   };
 
