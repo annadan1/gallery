@@ -5,31 +5,35 @@ import axios from 'axios';
 
 import routes from '../routes/routes.js';
 
-export const fetchPaintings = createAsyncThunk(
-  'fetchPaintings',
-  async () => {
-    const { data } = await axios.get(routes.paintingsPath());
-    return data;
+export const fetchCurrentPaintings = createAsyncThunk(
+  'fetchCurrentPaintings',
+  async (params) => {
+    const request = params;
+    const { headers, data } = await axios.get(routes.paintingsPath(), request);
+    const totalCount = headers['x-total-count'];
+    return { data, totalCount };
   },
 );
 
 const initialState = {
-  paintings: [],
-  filterPaintings: [],
+  currentPaintings: [],
+  numberOfPages: null,
 };
 
 const paintingsSlice = createSlice({
   name: 'paintings',
   initialState,
-  reducers: {
-    setFilterPaintings(state, { payload }) {
-      state.filterPaintings = payload;
+  reducer: {
+    addCurrentPaintings(state, { payload }) {
+      state.currentPaintings = payload.data;
+      state.numberOfPages = Math.ceil(payload.totalCount / 12);
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPaintings.fulfilled, (state, { payload }) => {
-        state.paintings = payload;
+      .addCase(fetchCurrentPaintings.fulfilled, (state, { payload }) => {
+        state.currentPaintings = payload.data;
+        state.numberOfPages = Math.ceil(payload.totalCount / 12);
       });
   },
 });

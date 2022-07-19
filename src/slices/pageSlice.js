@@ -1,18 +1,12 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice } from '@reduxjs/toolkit';
-import { actions as locationsActions } from './locationsSlice';
-import { actions as authorsActions } from './authorsSlice';
 
 const initialState = {
   touchPaintingId: null,
-  filters: {
-    page: null,
-    selectedNamePainting: '',
-    minYear: '',
-    maxYear: '',
-    selectedAuthor: '',
-    selectedLocation: '',
-  },
+  page: 1,
+  selectedPaintingName: '',
+  minYear: '',
+  maxYear: '',
 };
 
 const pageSlice = createSlice({
@@ -20,30 +14,21 @@ const pageSlice = createSlice({
   initialState,
   reducers: {
     setPage(state, { payload }) {
-      state.filters.page = payload;
+      state.page = payload;
       state.touchPaintingId = null;
     },
     setTouchPaintingId(state, { payload }) {
       state.touchPaintingId = payload;
     },
+    setSelectedPainting(state, { payload }) {
+      state.selectedPaintingName = payload;
+    },
     setMinYear(state, { payload }) {
-      state.filters.minYear = payload;
+      state.minYear = payload;
     },
     setMaxYear(state, { payload }) {
-      state.filters.maxYear = payload;
+      state.maxYear = payload;
     },
-    setSelectedNamePainting(state, { payload }) {
-      state.filters.selectedNamePainting = payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(locationsActions.setSelectedLocation, (state, { payload }) => {
-        state.filters.selectedLocation = payload;
-      })
-      .addCase(authorsActions.setSelectedAuthor, (state, { payload }) => {
-        state.filters.selectedAuthor = payload;
-      });
   },
 });
 
