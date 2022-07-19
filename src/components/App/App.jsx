@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  useSearchParams, Routes, Route,
+  useSearchParams, Routes, Route, useLocation,
 } from 'react-router-dom';
 import _ from 'lodash';
 import {
@@ -11,27 +11,17 @@ import {
 } from '../../slices/index.js';
 import Container from './Container.jsx';
 
-const getParams = (searchParams) => {
-  let params = { _page: 1, _limit: 12 };
+const getParams = () => {
+  const defaultParams = { _page: 1, _limit: 12 };
+  const location = useLocation();
 
-  if (searchParams.get('q')) {
-    params = { ...params, q: searchParams.get('q') };
-  }
-  if (searchParams.get('_page')) {
-    params = { ...params, _page: Number(searchParams.get('_page')) };
-  }
-  if (searchParams.get('authorId')) {
-    params = { ...params, authorId: Number(searchParams.get('authorId')) };
-  }
-  if (searchParams.get('locationId')) {
-    params = { ...params, locationId: Number(searchParams.get('locationId')) };
-  }
-  if (searchParams.get('created_gte')) {
-    params = { ...params, created_gte: Number(searchParams.get('created_gte')) };
-  }
-  if (searchParams.get('created_lte')) {
-    params = { ...params, created_lte: Number(searchParams.get('created_lte')) };
-  }
+  const currentParams = location.search
+    .slice(1)
+    .split('&')
+    .map((p) => p.split('='))
+    .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+
+  const params = { ...defaultParams, ...currentParams };
   return params;
 };
 
@@ -68,7 +58,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/gallery" element={<Container setQueryParams={setQueryParams} searchParams={searchParams} />} />
+      <Route path="/gallery/" element={<Container setQueryParams={setQueryParams} searchParams={searchParams} />} />
     </Routes>
   );
 };
