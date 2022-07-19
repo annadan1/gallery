@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions as actionsPage } from '../../slices/pageSlice';
-import useSearchParamsQuery from '../../hooks/useSearchParamsQuery.js';
 
-const Input = ({ setCurrentPage }) => {
+const Input = ({ setQueryParams, searchParams }) => {
   const dispatch = useDispatch();
-  const { searchParams, setQueryParams } = useSearchParamsQuery();
+  const selectedPaintingName = useSelector((state) => state.page.selectedPaintingName);
+
   const value = searchParams.get('q') || '';
 
   useEffect(() => {
     if (value) {
-      dispatch(actionsPage.setSelectedNamePainting(value));
+      dispatch(actionsPage.setSelectedPainting(value));
     }
-  });
+  }, [dispatch]);
 
   const handleChange = (e) => {
-    setCurrentPage(1);
-    dispatch(actionsPage.setSelectedNamePainting(e.target.value));
-    setQueryParams('q', e.target.value);
+    dispatch(actionsPage.setSelectedPainting(e.target.value));
+    dispatch(actionsPage.setPage(1));
+    setQueryParams({ _page: 1, q: e.target.value });
   };
 
   return (
-    <input type="text" placeholder="Name" className="Input SelectSize" onChange={handleChange} value={value} />
+    <input type="text" placeholder="Name" className="Input SelectSize" onChange={handleChange} value={selectedPaintingName} />
   );
 };
 

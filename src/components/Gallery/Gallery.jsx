@@ -1,31 +1,14 @@
 import React, { useEffect, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
-import usePaintingsFilter from '../../hooks/usePaintingsFilter.js';
 import AboutPainting from './AboutPainting.jsx';
 import { actions as actionsPainting } from '../../slices/paintingsSlice';
 import { actions as actionsPage } from '../../slices/pageSlice';
 import Image from './Image.jsx';
 
-const getFilteredPaintings = (paintings, filters, currentPage) => {
-  const dispatch = useDispatch();
-  const filterPaintings = usePaintingsFilter(paintings, filters);
-
-  useEffect(() => {
-    dispatch(actionsPainting.setFilterPaintings(filterPaintings));
-  });
-
-  return filterPaintings.find(({ page }) => page === currentPage);
-};
-
 const Gallery = ({
-  currentPage, paintings, filters, authors, locations,
+  paintings, authors, locations,
 }) => {
-  const currentPaintings = getFilteredPaintings(
-    paintings,
-    filters,
-    currentPage,
-  );
   const dispatch = useDispatch();
   const touchPaintingId = useSelector((state) => state.page.touchPaintingId);
   const handleTouchToogle = ({ id }) => {
@@ -47,7 +30,7 @@ const Gallery = ({
 
   return (
     <div className="Gallery">
-      {currentPaintings?.paintings.map((painting) => (
+      {paintings?.map((painting) => (
         <div
           key={painting.id}
           id={painting.id}

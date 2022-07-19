@@ -5,9 +5,8 @@ import useOutsideClick from '../../hooks/useOutsideClick.js';
 import { actions } from '../../slices/pageSlice.js';
 import SelectArrow from '../../images/SelectArrow.svg';
 import RangeContainer from './RangeContainer.jsx';
-import useSearchParamsQuery from '../../hooks/useSearchParamsQuery.js';
 
-const Range = () => {
+const Range = ({ searchParams, setQueryParams }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -21,9 +20,8 @@ const Range = () => {
   };
   useOutsideClick(ref, toggleOpen);
 
-  const { searchParams } = useSearchParamsQuery();
-  const from = searchParams.get('from');
-  const before = searchParams.get('before');
+  const from = searchParams.get('created_gte');
+  const before = searchParams.get('created_lte');
 
   useEffect(() => {
     if (from) { dispatch(actions.setMinYear(Number(from))); }
@@ -44,6 +42,8 @@ const Range = () => {
       {isOpen && (
       <RangeContainer
         onSubmit={toggleOpen}
+        searchParams={searchParams}
+        setQueryParams={setQueryParams}
       />
       )}
     </div>
