@@ -8,12 +8,12 @@ import DoubleArrowL from '../../images/DoubleArrowL.svg';
 const PaginationContainer = ({
   currentPage,
   setCurrentPage,
-  filterPaintings,
+  numberOfPages,
 }) => {
-  const firstPage = filterPaintings[0]?.page;
-  const lastPage = filterPaintings.slice(-1)[0]?.page;
+  const firstPage = 1;
+  const lastPage = numberOfPages;
 
-  const handlerClick = (newPage) => {
+  const handleClick = (newPage) => {
     window.scrollTo(0, 0);
     setCurrentPage(newPage);
   };
@@ -23,7 +23,7 @@ const PaginationContainer = ({
       <button
         type="button"
         className="Arrow Left"
-        onClick={() => handlerClick(firstPage)}
+        onClick={() => handleClick(firstPage)}
         disabled={currentPage === firstPage}
       >
         <DoubleArrowL />
@@ -31,23 +31,25 @@ const PaginationContainer = ({
       <button
         type="button"
         className="Arrow"
-        onClick={() => handlerClick(currentPage - 1)}
+        onClick={() => handleClick(currentPage - 1)}
         disabled={currentPage === firstPage}
       >
         <ArrowL />
       </button>
-      {filterPaintings.map(({ page }) => (
-        <Pagination
-          id={page}
-          key={page}
-          currentPage={currentPage}
-          handlerClick={handlerClick}
-        />
-      ))}
+      {
+        [...Array(numberOfPages).keys()].map((el) => (
+          <Pagination
+            id={el + 1}
+            key={el + 1}
+            currentPage={currentPage}
+            handleClick={handleClick}
+          />
+        ))
+}
       <button
         type="button"
         className="Arrow"
-        onClick={() => handlerClick(currentPage + 1)}
+        onClick={() => handleClick(currentPage + 1)}
         disabled={currentPage === lastPage}
       >
         <ArrowR />
@@ -55,7 +57,7 @@ const PaginationContainer = ({
       <button
         type="button"
         className="Arrow Right"
-        onClick={() => handlerClick(lastPage)}
+        onClick={() => handleClick(lastPage)}
         disabled={currentPage === lastPage}
       >
         <DoubleArrowR />
