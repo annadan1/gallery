@@ -12,16 +12,18 @@ import {
 import Container from './Container.jsx';
 
 const getParams = () => {
-  const defaultParams = { _page: 1, _limit: 12 };
+  let params = { _page: 1, _limit: 12 };
   const location = useLocation();
 
-  const currentParams = location.search
-    .slice(1)
-    .split('&')
-    .map((p) => p.split('='))
-    .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+  if (location.search) {
+    const currentParams = location.search
+      .slice(1)
+      .split('&')
+      .map((p) => p.split('='))
+      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+    params = { ...params, ...currentParams };
+  }
 
-  const params = { ...defaultParams, ...currentParams };
   return params;
 };
 
@@ -54,11 +56,12 @@ const App = () => {
     dispatch(fetchCurrentPaintings({ params: startingParams }));
     dispatch(fetchAuthors());
     dispatch(fetchLocations());
+    setSearchParams(startingParams);
   }, [dispatch]);
 
   return (
     <Routes>
-      <Route path="/gallery/" element={<Container setQueryParams={setQueryParams} searchParams={searchParams} />} />
+      <Route path="/gallery" element={<Container setQueryParams={setQueryParams} searchParams={searchParams} />} />
     </Routes>
   );
 };

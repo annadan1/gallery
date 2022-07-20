@@ -17,7 +17,9 @@ const Container = ({ setQueryParams, searchParams }) => {
 
   useEffect(() => {
     const page = Number(searchParams.get('_page'));
-    dispatch(actions.setPage(Number(page)));
+    if (page) {
+      dispatch(actions.setPage(Number(page)));
+    }
   }, [dispatch]);
 
   const setCurrentPage = (newPage) => {
