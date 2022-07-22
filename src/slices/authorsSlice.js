@@ -15,17 +15,11 @@ export const fetchAuthors = createAsyncThunk(
 
 const initialState = {
   authors: [],
-  selectedAuthor: {},
 };
 
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
-  reducers: {
-    setSelectedAuthor(state, { payload }) {
-      state.selectedAuthor = payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuthors.fulfilled, (state, { payload }) => {

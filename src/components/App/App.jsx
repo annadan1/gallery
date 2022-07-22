@@ -1,62 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   useSearchParams, Routes, Route, useLocation,
 } from 'react-router-dom';
-import _ from 'lodash';
 import {
   fetchAuthors,
   fetchLocations,
   fetchCurrentPaintings,
 } from '../../slices/index.js';
 import Container from './Container.jsx';
-
-const getParams = () => {
-  let params = { _page: 1, _limit: 12 };
-  const location = useLocation();
-
-  if (location.search) {
-    const currentParams = location.search
-      .slice(1)
-      .split('&')
-      .map((p) => p.split('='))
-      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
-    params = { ...params, ...currentParams };
-  }
-
-  return params;
-};
+import { getParams, updateParams } from '../../hooks/useUpdateParams.js';
 
 const App = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const startingParams = getParams(searchParams);
-  const [params, setParams] = useState(startingParams);
+  const params = getParams(location.search);
 
-  const updateParams = (currentParams) => {
-    let newParams = params;
-    Object.entries(currentParams).forEach(([key, value]) => {
-      if (!value) {
-        newParams = _.omit(newParams, key);
-      } else {
-        newParams = { ...newParams, [key]: value };
-      }
-    });
-    setParams(newParams);
-    setSearchParams(newParams);
-    return newParams;
-  };
-
-  const setQueryParams = (queryParams) => {
-    const newParams = updateParams(queryParams);
+  const setQueryParams = (currentParams) => {
+    const newParams = updateParams(currentParams, setSearchParams, params);
     dispatch(fetchCurrentPaintings({ params: newParams }));
   };
 
+  window.addEventListener('popstate', (event) => {
+    const { search } = event.target.location;
+    dispatch(fetchCurrentPaintings({ params: getParams(search) }));
+  });
+
   useEffect(() => {
-    dispatch(fetchCurrentPaintings({ params: startingParams }));
+    dispatch(fetchCurrentPaintings({ params }));
     dispatch(fetchAuthors());
     dispatch(fetchLocations());
-    setSearchParams(startingParams);
+    setSearchParams(params);
   }, [dispatch]);
 
   return (

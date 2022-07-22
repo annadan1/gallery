@@ -4,9 +4,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   touchPaintingId: null,
   page: 1,
-  selectedPaintingName: '',
-  minYear: '',
-  maxYear: '',
 };
 
 const pageSlice = createSlice({
@@ -19,15 +16,6 @@ const pageSlice = createSlice({
     },
     setTouchPaintingId(state, { payload }) {
       state.touchPaintingId = payload;
-    },
-    setSelectedPainting(state, { payload }) {
-      state.selectedPaintingName = payload;
-    },
-    setMinYear(state, { payload }) {
-      state.minYear = payload;
-    },
-    setMaxYear(state, { payload }) {
-      state.maxYear = payload;
     },
   },
 });

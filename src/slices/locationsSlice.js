@@ -15,17 +15,11 @@ export const fetchLocations = createAsyncThunk(
 
 const initialState = {
   locations: [],
-  selectedLocation: {},
 };
 
 const locationsSlice = createSlice({
   name: 'locations',
   initialState,
-  reducers: {
-    setSelectedLocation(state, { payload }) {
-      state.selectedLocation = payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLocations.fulfilled, (state, { payload }) => {

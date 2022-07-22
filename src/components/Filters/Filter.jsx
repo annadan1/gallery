@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import Input from './Input.jsx';
 import Select from './Select.jsx';
 import Range from './Range.jsx';
 import { actions as actionsPage } from '../../slices/pageSlice';
-import { actions as actionsLocations } from '../../slices/locationsSlice';
-import { actions as actionsAuthors } from '../../slices/authorsSlice';
-import routes from '../../routes/routes.js';
 
 const Filter = ({
   setQueryParams,
@@ -15,32 +12,16 @@ const Filter = ({
   locations,
 }) => {
   const dispatch = useDispatch();
+
+  const authorId = Number(searchParams.get('authorId'));
+  const locationId = Number(searchParams.get('locationId'));
+
   const updateLocations = locations?.map(({ id, location }) => ({
     id,
     name: location,
   }));
-
-  const currentLocation = useSelector(
-    (state) => state.locations.selectedLocation,
-  );
-  const currentAuthor = useSelector((state) => state.authors.selectedAuthor);
-
-  useEffect(() => {
-    const authorId = Number(searchParams.get('authorId'));
-    const locationId = Number(searchParams.get('locationId'));
-    if (locationId) {
-      fetch(routes.locationsPath())
-        .then((response) => response.json())
-        .then((data) => data.find(({ id }) => id === locationId))
-        .then((location) => dispatch(actionsLocations.setSelectedLocation(location)));
-    }
-    if (authorId) {
-      fetch(routes.authorsPath())
-        .then((response) => response.json())
-        .then((data) => data.find(({ id }) => id === authorId))
-        .then((author) => dispatch(actionsAuthors.setSelectedAuthor(author)));
-    }
-  }, [dispatch]);
+  const currentLocation = locations.find(({ id }) => id === locationId);
+  const currentAuthor = authors.find(({ id }) => id === authorId);
 
   return (
     <div className="Filter">
@@ -56,7 +37,6 @@ const Filter = ({
         searchParams={searchParams}
         onChange={(value) => {
           dispatch(actionsPage.setPage(1));
-          dispatch(actionsAuthors.setSelectedAuthor(value));
           setQueryParams({ _page: 1, authorId: value.id });
         }}
       />
@@ -68,7 +48,6 @@ const Filter = ({
         searchParams={searchParams}
         onChange={(value) => {
           dispatch(actionsPage.setPage(1));
-          dispatch(actionsLocations.setSelectedLocation(value));
           setQueryParams({ _page: 1, locationId: value.id });
         }}
       />
