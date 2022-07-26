@@ -2,7 +2,7 @@
 
 [github page](https://annadan1.github.io/gallery/)
 
-[vercel](https://gallery-qh3ui5ebj-annadan1.vercel.app/gallery)
+[vercel](https://gallery-am8q4uha6-annadan1.vercel.app/gallery?_page=1&_limit=12)
 
 
 -React
