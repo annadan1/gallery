@@ -1,12 +1,12 @@
 .Filter {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-bottom: 40px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-column-gap: 20px;
+  margin-bottom: 40px;
 }
 
 .SelectSize {
-  width: 265px;
+  max-width: 100%;
   height: 45px;
   font-size: 13px;
 }
@@ -15,13 +15,14 @@
   border: 1px solid var(--color);
   border-radius: 8px;
   outline: none;
-  padding: 0 15px;
+  padding-left: 15px;
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
   background: var(--filter-background-color);
   color: var(--color);
 }
+
 .Input::placeholder {
   font-size: 13px;
 }
@@ -31,37 +32,35 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
   border-radius: 8px;
   border: 1px solid var(--color);
   color: var(--color);
-  box-sizing: border-box;
-  background: var(--filter-background-color);
-  cursor: pointer;
-}
-
-.SelectOpen {
-  position: relative;
-  display: flex;
-  border: 1px solid var(--color);
-  border-bottom-color: var(--border-color);
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  border-radius: 8px 8px 0 0;
-  color: var(--color);
-  box-sizing: border-box;
   background: var(--filter-background-color);
   cursor: pointer;
 }
 
 .SelectTitle {
-  width: 190px;
+  word-wrap: break-word;
   word-break: break-all;
-  margin: 0 0 0 15px;
+  margin-left: 15px;
+  margin-right: 33%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.SelectOpen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--color);
+  border-bottom-color: var(--border-color);
+  border-radius: 8px 8px 0 0;
+  color: var(--color);
+  box-sizing: border-box;
+  background: var(--filter-background-color);
+  cursor: pointer;
 }
 
 .RemoveFilter {
@@ -103,7 +102,7 @@
   position: absolute;
   top: 100%;
   left: -1px;
-  width: calc(100%);
+  width: 100%;
   border: 1px solid var(--color);
   border-top-color: var(--border-color);
   padding: 0;
@@ -122,13 +121,13 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  width: calc(100%);
+  width: 100%;
   box-sizing: border-box;
   padding: 0 15px;
 }
 
 .SelectOption:hover {
-  width: calc(100%);
+  width: 100%;
   background: var(--color);
   color: var(--background-color);
   transition: 0.6s;
@@ -227,18 +226,7 @@ input[type="number"]:focus {
     -moz-appearance: textfield;
 }
 
-@media (max-width: 1365px) {
-  .Filter {
-    grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 40px;
-    grid-column-gap: 20px;
-  }
-  .SelectSize {
-    width: 220px;
-  }
-  .SelectTitle {
-    width: 150px;
-  }
+@media (max-width: 1366px) {
   .RangeContainer {
     max-height: 160px;
   }
@@ -252,27 +240,10 @@ input[type="number"]:focus {
   }
 }
 
-@media (max-width: 1023px) {
-  .Filter {
-    grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 40px;
-    grid-column-gap: 20px;
-  }
-  .SelectSize {
-    width: 160px;
-  }
-  .SelectTitle {
-    width: 90px;
-  }
+@media (max-width: 1024px) {
   .ButtonForRemoveFilter{
     right: 30px;
   }
-  .RangeContainer {
-    max-height: 160px;
-  }
-  .RangeOption {
-    width: 110px;
-  }
   .LineRange {
     display: block;
     padding: 15px 0;
@@ -280,29 +251,21 @@ input[type="number"]:focus {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 550px) {
   .Filter {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     margin-bottom: 45px;
     grid-row-gap: 15px;
   }
   .SelectSize {
-    width: 280px;
     font-size: 14px;
-  }
-  .SelectTitle {
-    width: 210px;
   }
   .Input::placeholder {
     font-size: 14px;
   }
   .RangeContainer {
-    max-height: 160px;
     margin-left: auto;
     margin-right: auto;
-  }
-  .RangeOption {
-    width: 110px;
   }
   .LineRange {
     display: block;
